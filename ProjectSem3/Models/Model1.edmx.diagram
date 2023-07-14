@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="02a7075820ce4a05aa80d6b7d2aa8097" Name="Diagram1">
+        <EntityTypeShape EntityType="Sem3Model.customer" Width="1.5" PointX="4.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.department" Width="1.5" PointX="10.125" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.employee" Width="1.5" PointX="10.125" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.favorite_service" Width="1.5" PointX="2.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.fee" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.job_title" Width="1.5" PointX="8.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.payment" Width="1.5" PointX="6.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.product_service" Width="1.5" PointX="6.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sem3Model.service" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Sem3Model.favorite_service_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="Sem3Model.payment_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="Sem3Model.product_service_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="Sem3Model.fk_department" ManuallyRouted="false" />
+        <AssociationConnector Association="Sem3Model.fk_job" ManuallyRouted="false" />
+        <AssociationConnector Association="Sem3Model.favorite_service_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="Sem3Model.fk_service" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

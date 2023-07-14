@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Sem3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="favorite_service" Relationship="Self.favorite_service_ibfk_1" FromRole="customer" ToRole="favorite_service" />
+    <NavigationProperty Name="payments" Relationship="Self.payment_ibfk_1" FromRole="customer" ToRole="payment" />
+    <NavigationProperty Name="product_service" Relationship="Self.product_service_ibfk_1" FromRole="customer" ToRole="product_service" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employees" Relationship="Self.fk_department" FromRole="department" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employee_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="job_title_id" Type="Int32" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="department" Relationship="Self.fk_department" FromRole="employee" ToRole="department" />
+    <NavigationProperty Name="job_title" Relationship="Self.fk_job" FromRole="employee" ToRole="job_title" />
+  </EntityType>
+  <EntityType Name="favorite_service">
+    <Key>
+      <PropertyRef Name="favorite_id" />
+    </Key>
+    <Property Name="favorite_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="service_id" Type="Int32" />
+    <NavigationProperty Name="customer" Relationship="Self.favorite_service_ibfk_1" FromRole="favorite_service" ToRole="customer" />
+    <NavigationProperty Name="service" Relationship="Self.favorite_service_ibfk_2" FromRole="favorite_service" ToRole="service" />
+  </EntityType>
+  <EntityType Name="fee">
+    <Key>
+      <PropertyRef Name="fee_id" />
+    </Key>
+    <Property Name="fee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fee_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="service_id" Type="Int32" />
+    <NavigationProperty Name="service" Relationship="Self.fk_service" FromRole="fee" ToRole="service" />
+  </EntityType>
+  <EntityType Name="job_title">
+    <Key>
+      <PropertyRef Name="job_title_id" />
+    </Key>
+    <Property Name="job_title_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="job_title_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employees" Relationship="Self.fk_job" FromRole="job_title" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="payment">
+    <Key>
+      <PropertyRef Name="payment_id" />
+    </Key>
+    <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="payment_date" Type="DateTime" Precision="0" />
+    <Property Name="amount" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="customer" Relationship="Self.payment_ibfk_1" FromRole="payment" ToRole="customer" />
+  </EntityType>
+  <EntityType Name="product_service">
+    <Key>
+      <PropertyRef Name="product_service_id" />
+    </Key>
+    <Property Name="product_service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="product_service_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="customer" Relationship="Self.product_service_ibfk_1" FromRole="product_service" ToRole="customer" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="service_id" />
+    </Key>
+    <Property Name="service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="service_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="favorite_service" Relationship="Self.favorite_service_ibfk_2" FromRole="service" ToRole="favorite_service" />
+    <NavigationProperty Name="fees" Relationship="Self.fk_service" FromRole="service" ToRole="fee" />
+  </EntityType>
+  <Association Name="favorite_service_ibfk_1">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="favorite_service" Type="Self.favorite_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="favorite_service">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="payment_ibfk_1">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="payment" Type="Self.payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="payment">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="product_service_ibfk_1">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="product_service" Type="Self.product_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="product_service">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_department">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_job">
+    <End Role="job_title" Type="Self.job_title" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job_title">
+        <PropertyRef Name="job_title_id" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="job_title_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="favorite_service_ibfk_2">
+    <End Role="service" Type="Self.service" Multiplicity="0..1" />
+    <End Role="favorite_service" Type="Self.favorite_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="service_id" />
+      </Principal>
+      <Dependent Role="favorite_service">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_service">
+    <End Role="service" Type="Self.service" Multiplicity="0..1" />
+    <End Role="fee" Type="Self.fee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="service_id" />
+      </Principal>
+      <Dependent Role="fee">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Sem3Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="departments" EntityType="Self.department" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="favorite_service" EntityType="Self.favorite_service" />
+    <EntitySet Name="fees" EntityType="Self.fee" />
+    <EntitySet Name="job_title" EntityType="Self.job_title" />
+    <EntitySet Name="payments" EntityType="Self.payment" />
+    <EntitySet Name="product_service" EntityType="Self.product_service" />
+    <EntitySet Name="services" EntityType="Self.service" />
+    <AssociationSet Name="favorite_service_ibfk_1" Association="Self.favorite_service_ibfk_1">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="favorite_service" EntitySet="favorite_service" />
+    </AssociationSet>
+    <AssociationSet Name="payment_ibfk_1" Association="Self.payment_ibfk_1">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="payment" EntitySet="payments" />
+    </AssociationSet>
+    <AssociationSet Name="product_service_ibfk_1" Association="Self.product_service_ibfk_1">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="product_service" EntitySet="product_service" />
+    </AssociationSet>
+    <AssociationSet Name="fk_department" Association="Self.fk_department">
+      <End Role="department" EntitySet="departments" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_job" Association="Self.fk_job">
+      <End Role="job_title" EntitySet="job_title" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="favorite_service_ibfk_2" Association="Self.favorite_service_ibfk_2">
+      <End Role="service" EntitySet="services" />
+      <End Role="favorite_service" EntitySet="favorite_service" />
+    </AssociationSet>
+    <AssociationSet Name="fk_service" Association="Self.fk_service">
+      <End Role="service" EntitySet="services" />
+      <End Role="fee" EntitySet="fees" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

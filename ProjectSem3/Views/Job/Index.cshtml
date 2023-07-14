@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ProjectSem3.Models.job_title>
+
+@{
+    ViewBag.Title = "List of Job";
+    Layout = "~/_LayoutPage1.cshtml";
+}
+
+
+
+
+
+
+<div class="content-wrapper" style="min-height: 1345.07px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Job Form</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Job Form</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">@ViewBag.Title</h3>
+                            <form method="post" action="~/Job/Search" class="card-tools">
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input value="@ViewBag.search" type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 400px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Job Name</th>
+                                        <th>Description</th>
+                                        <th>Control</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var j in Model)
+                                    {
+                                        <tr>
+                                            <td>@j.job_title_id</td>
+                                            <td>@j.job_title_name</td>
+                                            <td>@j.description</td>
+
+
+                                            <td><a href="~/Job/Edit/@j.job_title_id" class="btn btn-primary">Sửa</a><form class="d-inline"  action="~/Job/Delete/@j.job_title_id" method="post"><button type="submit" onclick=" return confirm('Can you delete this record??');" class="btn btn-danger"> Xóa</button></form></td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+
+                            @if (ViewBag.error != null)
+                            {
+
+                                <p class="alert alert-danger">@ViewBag.error</p>}
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+                    <a class="btn btn-primary" href="~/Job/Create">Create</a>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+</div>
+

@@ -1,0 +1,96 @@
+﻿
+
+@model IEnumerable<ProjectSem3.Models.service>
+@{
+    ViewBag.Title = "List of Department";
+    Layout = "~/_LayoutPage1.cshtml";
+}
+
+<div class="content-wrapper" style="min-height: 1345.07px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Department Form</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Department Form</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">@ViewBag.Title</h3>
+                            <form method="post" action="~/Department/Search" class="card-tools">
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input value="@ViewBag.search" type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0" style="height: 400px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Department Name</th>
+                                        <th>Description</th>
+                                        <th>Control</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var d in Model)
+                                    {
+                                        <tr>
+                                            <td>@d.service_id</td>
+                                            <td>@d.service_name</td>
+                                            <td>@d.description</td>
+
+
+                                            <td><a href="~/Service/Edit/@d.service_id" class="btn btn-primary">Sửa</a><form class="d-inline" action="~/Service/Delete/@d.service_id" method="post"><button type="submit" class="btn btn-danger"> Xóa</button></form></td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                            @if (ViewBag.error != null)
+                            {
+
+                                <p class="alert alert-danger">@ViewBag.error</p>}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+</div>
+
+
+
